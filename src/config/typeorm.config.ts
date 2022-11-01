@@ -20,6 +20,8 @@ export class TypeOrmConfig {
                 __dirname + '/../**/*.entity.{js,ts}',
                 __dirname + '/../**/!(*.test).{js,ts}',
             ],
+            migrationsTableName: 'migration',
+            migrations: [__dirname + '../migrations/**/*.{js,ts}'],
             synchronize: process.env.NODE_ENV === 'development',
             logging:
                 configService.get<LoggerOptions>('TYPEORM_LOGGING') || false,

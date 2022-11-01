@@ -1,47 +1,40 @@
 import { Injectable } from '@nestjs/common';
-import { v1 } from 'uuid';
+import { InjectRepository } from '@nestjs/typeorm';
 
-import { Board, BoardStatus } from './model/board.model';
+import { Board } from './board.entity';
+import { BoardRepository } from './board.repository';
+
+import { BoardStatus } from './constants/board-status.enum';
+
 import { CreateBoardDTO } from './dto/create-board.dto';
 
 @Injectable()
 export class BoardsService {
-    private boards: Board[] = [];
+    constructor(
+        @InjectRepository(BoardRepository)
+        private readonly boardRepository: BoardRepository,
+    ) {}
 
-    getBoards(): Board[] {
-        return this.boards;
+    async createBoard(createBoardDTO: CreateBoardDTO): Promise<Board> {
+        return this.boardRepository.createBoard(createBoardDTO);
     }
 
-    createBoard(createBoardDTO: CreateBoardDTO) {
-        const { title, description } = createBoardDTO;
+    async getBoardById(id: number): Promise<Board> {
+        // const found = await this.boardRepository.findOne({ where: { id } });
+        const found = await this.boardRepository.findOneBy({ id });
 
-        const board: Board = {
-            id: v1(),
-            title,
-            description,
-            status: BoardStatus.PUBLIC,
+        if (!found) {
+            throw new Error(`Cannot find board with id ${id}`);
+        }
+
+        return found;
+    }
+
+    async deleteBoard(id: number): Promise<object> {
+        const result = await this.boardRepository.delete(id);
+
+        return {
+            message: result.affected ? 'Success' : 'Failure',
         };
-
-        this.boards.push(board);
-
-        return board;
-    }
-
-    getBoardById(id: string): Board {
-        return this.boards.find((board) => board.id === id);
-    }
-
-    deleteBoard(id: string): void {
-        const found = this.getBoardById(id);
-
-        this.boards = this.boards.filter((board) => board.id !== found.id);
-    }
-
-    updateBoardStatus(id: string, status: BoardStatus): Board {
-        const board = this.getBoardById(id);
-
-        board.status = status;
-
-        return board;
     }
 }
