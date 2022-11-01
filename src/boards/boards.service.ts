@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { v1 } from 'uuid';
 
-import { Board, BoardStatus } from './board.model';
+import { Board, BoardStatus } from './model/board.model';
 import { CreateBoardDTO } from './dto/create-board.dto';
 
 @Injectable()

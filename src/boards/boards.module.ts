@@ -5,7 +5,7 @@ import { TypeOrmExModule } from 'src/utils/typeorm/typeorm-ex.module';
 import { BoardsController } from './boards.controller';
 import { BoardsService } from './boards.service';
 
-import { Board } from './entity/Board/board.entity';
+import { Board } from './entity/board.entity';
 import { BoardRepository } from './repository/board.repository';
 
 @Module({

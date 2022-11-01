@@ -4,7 +4,7 @@ import {
     ArgumentMetadata,
     BadRequestException,
 } from '@nestjs/common';
-import { BoardStatus } from '../board.model';
+import { BoardStatus } from '../model/board.model';
 
 @Injectable()
 export class BoardStatusValidationPipe implements PipeTransform {
