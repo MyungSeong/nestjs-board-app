@@ -13,7 +13,7 @@ import {
 import { Board, BoardStatus } from './board.model';
 import { BoardsService } from './boards.service';
 import { CreateBoardDTO } from './dto/create-board.dto';
-import { BoardStatusValidationPipe } from './pipes/board-status-validation.pipe';
+import { BoardStatusValidationPipe } from './pipe/board-status-validation.pipe';
 
 @Controller('boards')
 export class BoardsController {

@@ -4,7 +4,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import Joi from 'joi';
 
 import { BoardsModule } from './boards/boards.module';
-import { TypeOrmConfigAsync } from './boards/configs/typeorm.config';
+import { TypeOrmConfigAsync } from './boards/config/typeorm.config';
 
 @Module({
     imports: [
