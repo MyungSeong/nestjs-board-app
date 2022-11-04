@@ -31,6 +31,11 @@ export class BoardsController {
         return this.boardsService.createBoard(createBoardDTO);
     }
 
+    @Get()
+    getBoards(): Promise<Board[]> {
+        return this.boardsService.getBoards();
+    }
+
     @Get('/:id')
     getBoardById(@Param('id', ParseIntPipe) id: number): Promise<Board> {
         return this.boardsService.getBoardById(id);
