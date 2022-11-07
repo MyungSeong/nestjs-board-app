@@ -5,8 +5,8 @@ import { TypeOrmExModule } from 'src/utils/typeorm/typeorm-ex.module';
 import { BoardsController } from './boards.controller';
 import { BoardsService } from './boards.service';
 
-import { Board } from './board.entity';
-import { BoardRepository } from './board.repository';
+import { Board } from './entities/boards.entity';
+import { BoardRepository } from './boards.repository';
 
 @Module({
     imports: [TypeOrmExModule.forCustomRepository([Board, BoardRepository])],

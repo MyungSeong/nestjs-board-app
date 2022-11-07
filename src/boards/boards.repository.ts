@@ -3,9 +3,9 @@ import { v1 } from 'uuid';
 
 import { CustomRepository } from 'src/utils/typeorm/typeorm-ex.decorator';
 
-import { Board } from './board.entity';
+import { Board } from './entities/boards.entity';
 
-import { BoardStatus } from './constants/board-status.enum';
+import { BoardStatus } from './constants/boards-status.enum';
 
 import { CreateBoardDTO } from './dto/create-board.dto';
 

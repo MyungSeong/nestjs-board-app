@@ -1,6 +1,6 @@
 import { BaseEntity, Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
-import { BoardStatus } from './constants/board-status.enum';
+import { BoardStatus } from '../constants/boards-status.enum';
 
 @Entity()
 export class Board extends BaseEntity {

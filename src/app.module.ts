@@ -5,6 +5,7 @@ import Joi from 'joi';
 
 import { BoardsModule } from './boards/boards.module';
 import { TypeOrmConfigAsync } from './config/typeorm.config';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
     imports: [
@@ -30,6 +31,7 @@ import { TypeOrmConfigAsync } from './config/typeorm.config';
         }),
         TypeOrmModule.forRootAsync(TypeOrmConfigAsync),
         BoardsModule,
+        AuthModule,
     ],
 })
 export class AppModule {}
