@@ -1,5 +1,6 @@
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { JwtService } from '@nestjs/jwt';
 import bcrypt from 'bcrypt';
 
 import { UserRepository } from '../users/users.repository';
@@ -10,6 +11,7 @@ export class AuthService {
     constructor(
         @InjectRepository(UserRepository)
         private readonly userRepository: UserRepository,
+        private readonly jwtService: JwtService,
     ) {}
 
     async signUp(authcredentialsDTO: AuthCredentialsDTO): Promise<void> {
@@ -25,15 +27,18 @@ export class AuthService {
             throw new UnauthorizedException('User not found');
         }
 
-        const compare = await bcrypt.compareSync(password, user.password);
+        const match = await bcrypt.compareSync(password, user.password);
 
-        if (compare) {
+        if (match) {
+            const accessToken = await this.jwtService.signAsync({
+                id: user.id,
+            });
+
             return {
                 statusCode: 200,
                 message: 'Login successful',
+                token: accessToken,
             };
-        } else {
-            throw new UnauthorizedException('Password mismatch');
         }
     }
 }
